@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -14,7 +14,7 @@ import { ProfileDto } from './dtos/user.dtos';
 export class UserController {
   constructor(private service: UserService) {}
 
-  @Get()
+  @Post()
   @ApiResponse({
     status: 200,
     description: 'The user has been successfully got profile.',
