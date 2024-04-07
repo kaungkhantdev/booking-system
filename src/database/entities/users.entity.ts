@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Countries } from './countries.entity';
 
 @Entity()
 export class Users {
@@ -25,6 +26,10 @@ export class Users {
 
   @Column({
     type: 'int',
+    default: 0,
   })
   credit: number;
+
+  @ManyToOne(() => Countries, (countries) => countries.user)
+  country: Countries;
 }
