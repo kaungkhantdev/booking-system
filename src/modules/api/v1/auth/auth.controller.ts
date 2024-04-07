@@ -4,8 +4,14 @@ import { RegisterDto } from './dtos/sign-up.decorator';
 import { ResponseMessage } from '@dtos/index.decorators';
 import { LoginDto } from './dtos/sign-in.decorator';
 import { OtpDto } from './dtos/otp.decorator';
-import { ApiBadRequestResponse, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBody,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}

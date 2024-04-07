@@ -1,21 +1,21 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { PackageService } from './package.service';
 import { ResponseMessage } from '@dtos/response.decorator';
+import { CountryService } from './country.service';
 
-@ApiTags('Package')
+@ApiTags('Country')
 @Controller()
-export class PackageController {
-  constructor(private service: PackageService) {}
+export class CountryController {
+  constructor(private service: CountryService) {}
 
   @Get()
   @ApiResponse({
     status: 200,
-    description: 'The user has been successfully got packages list.',
+    description: 'The user has been successfully got countries list.',
   })
   @ApiBadRequestResponse({ description: 'Bad Request' })
   @ResponseMessage('Thanks you, your registration is success.')
   getAll() {
-    return this.service.findPackages();
+    return this.service.findCountries();
   }
 }

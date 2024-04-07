@@ -4,8 +4,9 @@ import configuration from '@config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from '@database/typeorm';
 import { CountriesSeeder } from './seeders';
-import { Countries } from '@database/entities';
+import { Countries, Packages } from '@database/entities';
 import { SeedService } from './seed.service';
+import { PackagesSeeder } from './seeders/packages.seeder';
 
 @Module({
   imports: [
@@ -18,8 +19,8 @@ import { SeedService } from './seed.service';
       useClass: TypeOrmConfigService,
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Countries]),
+    TypeOrmModule.forFeature([Countries, Packages]),
   ],
-  providers: [SeedService, CountriesSeeder],
+  providers: [SeedService, CountriesSeeder, PackagesSeeder],
 })
 export class SeedModule {}

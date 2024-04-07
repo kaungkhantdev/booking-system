@@ -12,6 +12,7 @@ import { APP_INTERCEPTOR, APP_PIPE, RouterModule } from '@nestjs/core';
 import { AuthModule } from '@api/v1/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { BaseResponseInterceptor } from './intercetpers/base.response';
+import { PackageModule } from '@api/v1/package/package.module';
 
 @Module({
   imports: [
@@ -32,10 +33,10 @@ import { BaseResponseInterceptor } from './intercetpers/base.response';
       },
     }),
     UserModule,
-    CountryModule,
-    MailModule,
     MailModule,
     AuthModule,
+    PackageModule,
+    CountryModule,
     RouterModule.register([
       {
         path: 'api/v1',
@@ -43,6 +44,14 @@ import { BaseResponseInterceptor } from './intercetpers/base.response';
           {
             path: 'auth',
             module: AuthModule,
+          },
+          {
+            path: 'package',
+            module: PackageModule,
+          },
+          {
+            path: 'country',
+            module: CountryModule,
           },
         ],
       },

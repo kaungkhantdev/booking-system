@@ -9,7 +9,7 @@ import {
 import { Users } from './users.entity';
 
 @Entity()
-export class Countries {
+export class Packages {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,19 +23,23 @@ export class Countries {
     type: 'varchar',
     length: 255,
   })
-  country_code: string;
+  type: string;
 
   @Column({
     type: 'varchar',
     length: 255,
   })
-  timezone_gmt: string;
+  duration: string;
 
   @Column({
-    type: 'varchar',
-    length: 255,
+    type: 'int',
   })
-  timezone_name: string;
+  credit: number;
+
+  @Column({
+    type: 'int',
+  })
+  price: number;
 
   @OneToMany(() => Users, (users) => users.country)
   user: Users[];
