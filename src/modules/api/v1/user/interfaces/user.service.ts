@@ -8,6 +8,7 @@ export interface CreateUser {
 export interface UpdateUser {
   name?: string;
   email?: string;
-  hashPassword?: string;
-  is_active?: boolean;
+  hash_password?: string;
+  country_id?: string;
+  credit?: number;
 }

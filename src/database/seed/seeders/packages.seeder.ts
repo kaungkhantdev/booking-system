@@ -20,21 +20,24 @@ export class PackagesSeeder implements SeederInterface {
         type: 'basic',
         credit: 100,
         price: 100,
-        duration: '10-days',
+        duration: 10,
+        unit: 'days',
       },
       {
         name: 'Pro package',
         type: 'pro',
         credit: 1000,
         price: 1000,
-        duration: '2-month',
+        duration: 1,
+        unit: 'month',
       },
       {
         name: 'Gold package',
         type: 'gold',
         credit: 5000,
         price: 3000,
-        duration: '3-month',
+        duration: 3,
+        unit: 'months',
       },
     );
 

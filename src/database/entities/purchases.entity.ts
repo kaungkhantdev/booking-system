@@ -2,14 +2,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Users } from './users.entity';
+import { Packages } from './packages.entity';
 
 @Entity()
-export class Countries {
+export class Purchases {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,22 +20,19 @@ export class Countries {
     type: 'varchar',
     length: 255,
   })
-  name: string;
+  expired_time: string;
 
   @Column({
     type: 'varchar',
     length: 255,
   })
-  country_code: string;
+  remark: string;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-  })
-  timezone: string;
+  @ManyToOne(() => Users, (user) => user.purchase)
+  user: Users;
 
-  @OneToMany(() => Users, (users) => users.country)
-  user: Users[];
+  @ManyToOne(() => Packages, (pak) => pak.purchase)
+  package: Packages;
 
   @CreateDateColumn({
     type: 'timestamp',

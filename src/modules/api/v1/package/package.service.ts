@@ -4,11 +4,19 @@ import { PackageRepository } from './package.repository';
 
 @Injectable()
 export class PackageService {
-  constructor(private userRepository: PackageRepository) {}
+  constructor(private repo: PackageRepository) {}
 
   async findPackages(): Promise<Packages[]> {
     try {
-      return await this.userRepository.findAll();
+      return await this.repo.findAll();
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  async findByIdPackages(id: string): Promise<Packages> {
+    try {
+      return await this.repo.findOneBy({ id });
     } catch (error) {
       throw new BadRequestException(error.message);
     }

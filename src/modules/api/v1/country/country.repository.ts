@@ -18,8 +18,7 @@ export class CountryRepository {
       country.name = data.name;
       country.country_code = data.country_code;
 
-      country.timezone_gmt = data.timezone_gmt;
-      country.timezone_name = data.timezone_name;
+      country.timezone = data.timezone;
 
       return await this.repo.save(country);
     } catch (error) {

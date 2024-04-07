@@ -7,8 +7,8 @@ import { PackageRepository } from './package.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Packages])],
-  providers: [PackageService, PackageRepository],
   controllers: [PackageController],
+  providers: [PackageService, PackageRepository],
   exports: [PackageService],
 })
 export class PackageModule {}

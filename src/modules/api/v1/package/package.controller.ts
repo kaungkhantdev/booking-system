@@ -14,7 +14,7 @@ export class PackageController {
     description: 'The user has been successfully got packages list.',
   })
   @ApiBadRequestResponse({ description: 'Bad Request' })
-  @ResponseMessage('Thanks you, your registration is success.')
+  @ResponseMessage('The user has been successfully got packages list.')
   getAll() {
     return this.service.findPackages();
   }

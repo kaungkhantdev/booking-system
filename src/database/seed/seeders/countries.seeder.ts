@@ -16,22 +16,19 @@ export class CountriesSeeder implements SeederInterface {
 
     data.push(
       {
-        name: 'United States',
-        country_code: 'US',
-        timezone_gmt: '-6.00',
-        timezone_name: '(GMT-06:00)-Central Time (US & Canada)',
+        name: 'Thailand',
+        country_code: 'TH',
+        timezone: 'Asia/Bangkok',
       },
       {
         name: 'Singapore',
         country_code: 'SG',
-        timezone_gmt: '8.00',
-        timezone_name: '(GMT+08:00)- Singapore)',
+        timezone: 'Asia/Singapore',
       },
       {
         name: 'Myanmar',
         country_code: 'MM',
-        timezone_gmt: '6.50',
-        timezone_name: '(GMT+06:30)-Rangoon',
+        timezone: 'Asia/Yangon',
       },
     );
 

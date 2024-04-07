@@ -18,4 +18,15 @@ export class PackageRepository {
       throw new NotAcceptableException(err.message);
     }
   }
+
+  async findOneBy(data: object): Promise<Packages> {
+    try {
+      return await this.repo.findOne({
+        where: data,
+      });
+    } catch (error) {
+      const err = error as Error;
+      throw new NotAcceptableException(err.message);
+    }
+  }
 }

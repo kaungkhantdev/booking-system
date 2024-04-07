@@ -36,7 +36,7 @@ export class UserService {
     return await this.userRepository.findOneBy({ email });
   }
 
-  async updateUser(id: number, data: UpdateUser) {
+  async updateUser(id: string, data: UpdateUser) {
     const user = await this.userRepository.findOneBy({ id });
 
     if (!user) {

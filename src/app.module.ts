@@ -13,6 +13,7 @@ import { AuthModule } from '@api/v1/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { BaseResponseInterceptor } from './intercetpers/base.response';
 import { PackageModule } from '@api/v1/package/package.module';
+import { PurchaseModule } from '@api/v1/purchase/purchase.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { PackageModule } from '@api/v1/package/package.module';
     AuthModule,
     PackageModule,
     CountryModule,
+    PurchaseModule,
     RouterModule.register([
       {
         path: 'api/v1',
@@ -52,6 +54,10 @@ import { PackageModule } from '@api/v1/package/package.module';
           {
             path: 'country',
             module: CountryModule,
+          },
+          {
+            path: 'purchase',
+            module: PurchaseModule,
           },
         ],
       },

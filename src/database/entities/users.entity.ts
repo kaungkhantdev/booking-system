@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Countries } from './countries.entity';
+import { Purchases } from './purchases.entity';
 
 @Entity()
 export class Users {
@@ -42,6 +44,9 @@ export class Users {
 
   @ManyToOne(() => Countries, (countries) => countries.user)
   country: Countries;
+
+  @OneToMany(() => Purchases, (purchases) => purchases.user)
+  purchase: Purchases;
 
   @CreateDateColumn({
     type: 'timestamp',

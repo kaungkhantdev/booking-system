@@ -1,55 +1,12 @@
 /** @Author by kkz */
-
 /**
- * Role code for user
- *
- * 1001 -> super admin
- * 2002 -> admin
- * 3003 -> shop
- * 3004 -> user
+ * Unit of times
  */
-export const ROLE_CODES = {
-  SUPER_ADMIN: 1001,
-  ADMIN: 2002,
-  STORE: 3003,
-  USER: 4004,
-};
-
-/**
- * Super Admin
- *
- *
- */
-export const SUPER_ADMIN = {
-  EMAIL: 'super.admin@ecommerce.com',
-  PASSWORD: 'password',
-  NAME: 'super admin',
-  CODE: ROLE_CODES.SUPER_ADMIN,
-};
-
-/**
- * Admin
- *
- *
- */
-export const ADMIN = {
-  EMAIL: 'admin@ecommerce.com',
-  PASSWORD: 'password',
-  NAME: 'super admin',
-  CODE: ROLE_CODES.ADMIN,
-};
-
-/**
- * Admin
- *
- *
- */
-export const STORE = {
-  EMAIL: 'store@ecommerce.com',
-  PASSWORD: 'password',
-  NAME: 'Shopo',
-  CODE: ROLE_CODES.STORE,
-  PHONE: '0988777666',
+export const PACKAGE_UNIT = {
+  DAY: 'day',
+  DAYS: 'days',
+  MONTH: 'month',
+  MONTHS: 'months',
 };
 
 /**
@@ -106,6 +63,7 @@ export const ERROR_MSG = {
   SIGN_IN_ERR: 'Sorry, Email or password is invalid. Please try again.',
   SIGN_UP_NOT_SAME_PASSWORD:
     'Sorry, your password and confirm password is not same. It must be same. Please try again.',
+  PURCHASE_ERR: 'Sorry, user or package is not found.',
 };
 
 /**

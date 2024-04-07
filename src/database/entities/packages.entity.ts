@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Users } from './users.entity';
+import { Purchases } from './purchases.entity';
 
 @Entity()
 export class Packages {
@@ -29,7 +29,12 @@ export class Packages {
     type: 'varchar',
     length: 255,
   })
-  duration: string;
+  unit: string;
+
+  @Column({
+    type: 'int',
+  })
+  duration: number;
 
   @Column({
     type: 'int',
@@ -41,8 +46,8 @@ export class Packages {
   })
   price: number;
 
-  @OneToMany(() => Users, (users) => users.country)
-  user: Users[];
+  @OneToMany(() => Purchases, (purchase) => purchase.package)
+  purchase: Purchases;
 
   @CreateDateColumn({
     type: 'timestamp',

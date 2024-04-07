@@ -62,7 +62,7 @@ export class UserRepository {
     }
   }
 
-  async update(id: number, attrs: Partial<Users>): Promise<Users> {
+  async update(id: string, attrs: Partial<Users>): Promise<Users> {
     try {
       const user = await this.repo.findOneById(id);
 
