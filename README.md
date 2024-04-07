@@ -40,7 +40,12 @@ $ npm install
 # create database
 $ CREATE SCHEMA `booking_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-# add data
+# copy .env.example
+$ cp .env.example .env
+
+# after copy env file add require configuration to
+
+# add data with cmd
 $ npm run seed
 
 # update class's country
@@ -48,10 +53,6 @@ $ UPDATE booking_system.classes SET countryId=1 WHERE credit=20;
 $ UPDATE booking_system.classes SET countryId=3 WHERE credit=100;
 $ UPDATE booking_system.classes SET countryId=2 WHERE credit=10;
 
-# copy .env.example
-$ cp .env.example .env
-
-# after copy env file add require configuration to
 
 ```
 ## Running the app
