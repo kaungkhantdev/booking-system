@@ -1,4 +1,10 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  ValidationPipe,
+} from '@nestjs/common';
+import { redisStore } from 'cache-manager-redis-yet';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -14,6 +20,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { BaseResponseInterceptor } from './intercetpers/base.response';
 import { PackageModule } from '@api/v1/package/package.module';
 import { PurchaseModule } from '@api/v1/purchase/purchase.module';
+import { CheckToken } from '@middleware/check-token.middleware';
+import { PurchaseController } from '@api/v1/purchase/purchase.controller';
+import { PackageController } from '@api/v1/package/package.controller';
+import { ClassModule } from '@api/v1/class/class.module';
+import { ClassController } from '@api/v1/class/class.controller';
+import { CacheModule } from '@nestjs/cache-manager';
+import { BookingModule } from '@api/v1/booking/booking.module';
+import { BookingLogModule } from '@api/v1/booking-log/booking-log.module';
+import { BookingController } from '@api/v1/booking/booking.controller';
 
 @Module({
   imports: [
@@ -33,12 +48,26 @@ import { PurchaseModule } from '@api/v1/purchase/purchase.module';
         expiresIn: process.env.JWT_EXPIRE_TIME,
       },
     }),
+    CacheModule.registerAsync({
+      isGlobal: true,
+      useFactory: async () => ({
+        store: await redisStore({
+          socket: {
+            host: process.env.REDIS_URL ?? 'localhost',
+            port: Number(process.env.REDIS_PORT) ?? 6379,
+          },
+        }),
+      }),
+    }),
     UserModule,
     MailModule,
     AuthModule,
     PackageModule,
     CountryModule,
     PurchaseModule,
+    ClassModule,
+    BookingModule,
+    BookingLogModule,
     RouterModule.register([
       {
         path: 'api/v1',
@@ -59,6 +88,14 @@ import { PurchaseModule } from '@api/v1/purchase/purchase.module';
             path: 'purchase',
             module: PurchaseModule,
           },
+          {
+            path: 'class',
+            module: ClassModule,
+          },
+          {
+            path: 'booking',
+            module: BookingModule,
+          },
         ],
       },
     ]),
@@ -78,4 +115,15 @@ import { PurchaseModule } from '@api/v1/purchase/purchase.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CheckToken)
+      .forRoutes(
+        PurchaseController,
+        PackageController,
+        ClassController,
+        BookingController,
+      );
+  }
+}

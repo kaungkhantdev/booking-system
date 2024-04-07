@@ -2,15 +2,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Users } from './users.entity';
-import { Classes } from './classes.entity';
+import { Countries } from './countries.entity';
+import { Bookings } from './booking.entity';
 
 @Entity()
-export class Countries {
+export class Classes {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,19 +25,41 @@ export class Countries {
     type: 'varchar',
     length: 255,
   })
-  country_code: string;
+  unit: string;
+
+  @Column({
+    type: 'int',
+  })
+  duration: number;
+
+  @Column({
+    type: 'int',
+  })
+  credit: number;
+
+  @Column({
+    type: 'int',
+    default: 5,
+  })
+  user_limit: number;
 
   @Column({
     type: 'varchar',
     length: 255,
   })
-  timezone: string;
+  start_time: string;
 
-  @OneToMany(() => Users, (users) => users.country)
-  user: Users;
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  end_time: string;
 
-  @OneToMany(() => Classes, (classes) => classes.country)
-  class: Classes;
+  @ManyToOne(() => Countries, (country) => country.class)
+  country: Countries;
+
+  @OneToMany(() => Bookings, (booking) => booking.class)
+  booking: Bookings;
 
   @CreateDateColumn({
     type: 'timestamp',

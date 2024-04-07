@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Countries } from './countries.entity';
 import { Purchases } from './purchases.entity';
+import { Bookings } from './booking.entity';
 
 @Entity()
 export class Users {
@@ -47,6 +48,9 @@ export class Users {
 
   @OneToMany(() => Purchases, (purchases) => purchases.user)
   purchase: Purchases;
+
+  @OneToMany(() => Bookings, (booking) => booking.user)
+  booking: Bookings;
 
   @CreateDateColumn({
     type: 'timestamp',

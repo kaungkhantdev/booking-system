@@ -42,6 +42,13 @@ export const addDaysTime = (timezone: string, addNumber: number = 1) => {
 };
 
 /** check time or end time */
+export const isEnded = (time: string, timezone: string): boolean => {
+  const Time = moment.tz(time, timezone);
+
+  const currentTime = moment.tz(time);
+
+  return Time.isBefore(currentTime);
+}
 
 /** start time */
 

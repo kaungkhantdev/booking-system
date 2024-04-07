@@ -64,6 +64,11 @@ export const ERROR_MSG = {
   SIGN_UP_NOT_SAME_PASSWORD:
     'Sorry, your password and confirm password is not same. It must be same. Please try again.',
   PURCHASE_ERR: 'Sorry, user or package is not found.',
+  USER_CLASS_NOT_FOUND: 'Sorry, user or class is not found.',
+  BOOKING_NOT_FOUND: 'Sorry, booking is not found.',
+  LOW_CREDIT: 'Sorry, your credit is not enough to booking',
+  WAITING_LIST: 'Sorry, your booking is waiting',
+  COUNTRY_DIF: 'Sorry, your county is not valid to booking',
 };
 
 /**

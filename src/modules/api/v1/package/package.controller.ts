@@ -1,5 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { PackageService } from './package.service';
 import { ResponseMessage } from '@dtos/response.decorator';
 
@@ -14,6 +19,7 @@ export class PackageController {
     description: 'The user has been successfully got packages list.',
   })
   @ApiBadRequestResponse({ description: 'Bad Request' })
+  @ApiBearerAuth()
   @ResponseMessage('The user has been successfully got packages list.')
   getAll() {
     return this.service.findPackages();
