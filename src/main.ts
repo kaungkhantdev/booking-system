@@ -11,14 +11,14 @@ async function bootstrap() {
   const port = configService.get('port');
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Booking system')
+    .setDescription('The booking system API description')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('booking-system')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(port ?? '3000');
+  await app.listen(port ?? '8000');
 }
 bootstrap();

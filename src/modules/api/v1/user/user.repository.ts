@@ -21,6 +21,8 @@ export class UserRepository {
       user.password = data.password;
       user.country = data.country;
 
+      user.email_verify = new Date().getTime();
+
       return await this.repo.save(user);
     } catch (error) {
       const err = error as Error;
