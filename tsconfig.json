@@ -22,10 +22,11 @@
       "@api/*": ["src/modules/api/*"],
       "@config/*": ["src/config/*"],
       "@database/*": ["src/database/*"],
+      "@dtos/*": ["src/dtos/*"],
       "@interceptors/*": ["src/interceptors/*"],
       "@middleware/*": ["src/middleware/*"],
       "@mail/*": ["src/mail/*"],
-      "@helper/*": ["src/helper/*"],
+      "@utils/*": ["src/utils/*"],
     }
   }
 }
