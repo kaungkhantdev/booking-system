@@ -29,6 +29,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { BookingModule } from '@api/v1/booking/booking.module';
 import { BookingLogModule } from '@api/v1/booking-log/booking-log.module';
 import { BookingController } from '@api/v1/booking/booking.controller';
+import { UserController } from '@api/v1/user/user.controller';
 
 @Module({
   imports: [
@@ -96,6 +97,10 @@ import { BookingController } from '@api/v1/booking/booking.controller';
             path: 'booking',
             module: BookingModule,
           },
+          {
+            path: 'user',
+            module: UserModule,
+          },
         ],
       },
     ]),
@@ -124,6 +129,7 @@ export class AppModule implements NestModule {
         PackageController,
         ClassController,
         BookingController,
+        UserController,
       );
   }
 }

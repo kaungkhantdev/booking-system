@@ -53,6 +53,25 @@ export class UserRepository {
     }
   }
 
+  async findOneByProfile(data: object): Promise<Users> {
+    try {
+      return await this.repo.findOne({
+        where: data,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          credit: true,
+          email_verify: true,
+        },
+        relations: { country: true },
+      });
+    } catch (error) {
+      const err = error as Error;
+      throw new NotAcceptableException(err.message);
+    }
+  }
+
   async findByEmail(email: string): Promise<Users | undefined> {
     try {
       return await this.repo.findOneBy({ email });

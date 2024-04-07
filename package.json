@@ -17,7 +17,6 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed": "nest start --entryFile seed"
   },
   "dependencies": {
@@ -84,6 +83,18 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@app": "<rootDir>/app.module",
+      "^@api/(.*)$": "<rootDir>/modules/api/$1",
+      "^@config/(.*)$": "<rootDir>/config/$1",
+      "^@database/(.*)$": "<rootDir>/database/$1",
+      "^@dtos/(.*)$": "<rootDir>/dtos/$1",
+      "^@interceptors/(.*)$": "<rootDir>/interceptors/$1",
+      "^@guards/(.*)$": "<rootDir>/guards/$1",
+      "^@middleware/(.*)$": "<rootDir>/middleware/$1",
+      "^@mail/(.*)$": "<rootDir>/mail/$1",
+      "^@utils/(.*)$": "<rootDir>/utils/$1"
+    }
   }
 }
