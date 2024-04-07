@@ -26,12 +26,34 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+
 ## Installation
 
 ```bash
 $ npm install
 ```
+## Add Require data to database
 
+```bash
+
+# if your are using simple data, you don't need to do this step. Please Direct go to running app step.
+# create database
+$ CREATE SCHEMA `booking_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+# add data
+$ npm run seed
+
+# update class's country
+$ UPDATE booking_system.classes SET countryId=1 WHERE credit=20;
+$ UPDATE booking_system.classes SET countryId=3 WHERE credit=100;
+$ UPDATE booking_system.classes SET countryId=2 WHERE credit=10;
+
+# copy .env.example
+$ cp .env.example .env
+
+# after copy env file add require configuration to
+
+```
 ## Running the app
 
 ```bash
@@ -51,11 +73,17 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
+```
+
+## Swagger
+
+```bash
+# go to swagger api user interface.
+$ http://localhost:8000/api
+
+
 ```
 
 ## Support
