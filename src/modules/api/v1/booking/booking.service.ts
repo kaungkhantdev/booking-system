@@ -141,7 +141,7 @@ export class BookingService {
     const clsCredit = cls.credit;
 
     const user = await this.userService.findById(data.user_id);
-
+    const count = await this.countBooking(Number(data.class_id));
     const user_credit = user.credit + clsCredit;
 
     /** add user's credit */
@@ -163,9 +163,9 @@ export class BookingService {
     const wait_list_1 = await this.getValue(this.storeKey);
     if (wait_list_1 && wait_list_1.length > 0) {
       const data = wait_list_1.pop();
-      const bookData = { user_id: data.user_id, class_id: data.class_id };
-
-      return await this.booking(bookData);
+      if (cls.user_limit > count) {
+        await this.bookingSuccess(data);
+      }
     }
 
     return 'Successfully, you have been cancel booking.';
@@ -176,8 +176,7 @@ export class BookingService {
     this.persist.push(data);
 
     await this.setValue(this.storeKey, this.persist);
-    return this.persist;
-    // throw new BadRequestException(ERROR_MSG.WAITING_LIST);
+    throw new BadRequestException(ERROR_MSG.WAITING_LIST);
   }
 
   /** save to booking log */
