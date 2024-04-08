@@ -48,8 +48,17 @@ export const isEnded = (time: string, timezone: string): boolean => {
   const currentTime = moment.tz(time);
 
   return Time.isBefore(currentTime);
-}
-
-/** start time */
+};
 
 /** over 4hour or within 4hour */
+export const isOver4hr = (time: string, timezone: string) => {
+  const momentTime = moment(time);
+
+  const bangkokTime = momentTime.tz(timezone);
+
+  const currentBangkokTime = moment().tz(timezone);
+
+  const differenceInHours = bangkokTime.diff(currentBangkokTime, 'hours');
+
+  return differenceInHours > 4;
+};
