@@ -63,7 +63,7 @@ export class BookingRepository {
     try {
       return await this.repo.find({
         where: { user: { id: user_id } },
-        relations: ['user'],
+        relations: ['user', 'class'],
       });
     } catch (error) {
       const err = error as Error;

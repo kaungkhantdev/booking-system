@@ -17,7 +17,7 @@ import { ClassService } from '../class/class.service';
 import { ERROR_MSG } from '@config/constants';
 import { BookingLogService } from '../booking-log/booking-log.service';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
-import { isEnded } from '@utils/time';
+import { isEnded, isOver4hr } from '@utils/time';
 
 @Injectable()
 export class BookingService {
@@ -80,6 +80,13 @@ export class BookingService {
       const cls = await this.classSErvice.findByIdClass(data.class_id);
       const user = await this.userService.findById(data.user_id);
 
+      /** not booking when class have been stated */
+      if (isEnded(cls.start_time, cls.country.timezone)) {
+        throw new BadRequestException(
+          'Sorry, you have not booking because the class have already started.',
+        );
+      }
+
       /** same country */
       if (user.country.id != cls.country.id) {
         throw new BadRequestException(ERROR_MSG.COUNTRY_DIF);
@@ -137,15 +144,22 @@ export class BookingService {
 
   /** booking cancel */
   async bookingCancel(data: CancelBooking) {
+    const bookingCheck = await this.repo.findOneBy({ id: data.booking_id });
     const cls = await this.classSErvice.findByIdClass(data.class_id);
     const clsCredit = cls.credit;
 
     const user = await this.userService.findById(data.user_id);
     const count = await this.countBooking(Number(data.class_id));
-    const user_credit = user.credit + clsCredit;
+    /** before over 4hr start-time, the user's got refund */
+    if (
+      !bookingCheck.cancel &&
+      isOver4hr(cls.start_time, cls.country.timezone)
+    ) {
+      const user_credit = user.credit + clsCredit;
 
-    /** add user's credit */
-    await this.userService.updateUser(data.user_id, { credit: user_credit });
+      /** add user's credit */
+      await this.userService.updateUser(data.user_id, { credit: user_credit });
+    }
 
     const booking = await this.updateBookings(data.booking_id, {
       ...data,
